@@ -33,4 +33,13 @@ jobs:
           scan-type: fs
           scan-ref: .
           severity: HIGH,CRITICAL
-          exit-code: 1
+          format: json
+          output: trivy-results.json
+          exit-code: 0
+
+      - name: Explain and comment
+        run: python scripts/explain.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
