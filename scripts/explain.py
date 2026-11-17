@@ -52,8 +52,9 @@ def ask_gemini(finding):
 def explain(finding):
     try:
         return ask_gemini(finding)
-    except Exception as error:
-        print("Gemini failed:", error)
+        except Exception as error:
+        detail = error.read().decode() if hasattr(error, "read") else ""
+        print("Gemini failed:", error, detail)
         return finding["title"] or "No explanation available."
 
 def build_comment(findings):
