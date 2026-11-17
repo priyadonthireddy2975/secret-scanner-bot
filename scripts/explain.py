@@ -52,9 +52,9 @@ def ask_gemini(finding):
 def explain(finding):
     try:
         return ask_gemini(finding)
-    except Exception:
+    except Exception as error:
+        print("Gemini failed:", error)
         return finding["title"] or "No explanation available."
-
 
 def build_comment(findings):
     lines = ["## Dependency scan results", ""]
